@@ -1,20 +1,23 @@
+from classe_fabricante import *
 from classe_produto import *
 
 class Estoque:
     def __init__(self):
         self.listaCadastro = []
-        self.listaCadastro.append(Produto(1, 'lapis', 'aa',0))
-        
+        self.listaFabri = [] 
 
 
     def salvar_produtos(self):
-        entrada_cod = input('Informe o código do produto: ')
-        entrada_descricao = input('Informe a descrição do produto: ')
-        entrada_fabricante = input('Informe o fabricante: ')
-        entrada_quant = int(input('Informe a quantidade: '))
-        self.listaCadastro.append(Produto(entrada_cod, entrada_descricao, entrada_fabricante, entrada_quant))
-        print('Cadastro realizado com sucesso!')
-        print('===================================')
+        entrada = input('Digite o código do fabricante:')
+        for i in range(len(self.listaFabri)):
+            if entrada == self.listaFabri[i].codi:
+                entrada_cod = input('Informe o código do produto: ')
+                entrada_descricao = input('Informe a descrição do produto: ')
+                entrada_fabri = print()
+                entrada_quant = int(input('Informe a quantidade: '))
+                self.listaCadastro.append(Produto(entrada_cod, entrada_descricao, entrada_fabri, entrada_quant))
+                print('Cadastro realizado com sucesso!')
+                print('===================================')
 
     def listar_todos_produtos(self):
         entrada = input('Digite o código do produto:')
@@ -22,14 +25,14 @@ class Estoque:
             if entrada == self.listaCadastro[i].cod:
                 print('Cod:',self.listaCadastro[i].cod,
                       '| Descrição:',self.listaCadastro[i].descricao,
-                      '| fabricante:',self.listaCadastro[i].fabricante,
+                      '| fabricante:',self.listaFabri[i].nome,
                       '| Quantidade:',self.listaCadastro[i].quant)
                 print('===================================')
         if entrada == '':
             for i in range(len(self.listaCadastro)):
                 print('Cod:',self.listaCadastro[i].cod,
                           '| Descrição:',self.listaCadastro[i].descricao,
-                          '| fabricante:',self.listaCadastro[i].fabricante,
+                          '| fabricante:',self.listaFabri[i].nome,
                           '| Quantidade:',self.listaCadastro[i].quant)
                 print('===================================')
         else:
@@ -42,3 +45,10 @@ class Estoque:
                 self.listaCadastro[i].descricao = input('Digite a nova descrição do produto:')
                 print('Alteração realizada com sucesso!')
                 print('===================================')
+
+    def cadastrar_fabri(self):
+        entrada_codi = input('Digite o código do fabricante:')
+        entrada_nome = input('Digite o nome do fabricante:')
+        self.listaFabri.append(Fabricante(entrada_codi,entrada_nome))
+        print('Cadastro realizado com sucesso!')
+        print('===================================')
