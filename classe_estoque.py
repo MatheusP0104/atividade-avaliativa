@@ -1,6 +1,6 @@
-from operator import le
 from classe_fabricante import *
 from classe_produto import *
+
 
 class Estoque:
     def __init__(self):
@@ -37,7 +37,7 @@ class Estoque:
                     print('===================================')
         else:
             print('esses são todos os produtos')
-        
+
     def alterar_produto(self):
         entrada = input('Digite o código do produto: ')
         for i in range(len(self.listaCadastro)):

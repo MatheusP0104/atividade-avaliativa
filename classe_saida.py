@@ -1,24 +1,21 @@
-from classe_estoque import *
+from classe_db import DBestoque
 
 
 class Saida:
     def __init__(self):
-        self.entrada2 = Estoque()
+        self.entrada2 = DBestoque()
         self.listaHistSaida = []
 
 
-    def sair_produtos(self):
-        controle = int(input('informe o código do produto:'))
-        for i in range(len(self.entrada2.listaCadastro)):
-            if controle == int(self.entrada2.listaCadastro[i].cod):
-                var = int((input('Informe a quantidade que irá sair:')))
-                self.entrada2.listaCadastro[i].quant -= var
-                self.listaHistSaida.append(f'Produto:{self.entrada2.listaCadastro[i].descricao} | Quantidade que foi retirada: {var}')
-                print('Quantidade alterada!')
-                print('===================================')
+    def sair_produtos(self,cod,var,atributo):
+        comando_sql = 'select cod from Produtos'
+        self.entrada2.mycursor.execute(comando_sql)
+        lista = self.entrada2.mycursor.fetchall()
+        for i in lista:
+            if int(cod) == i[0]:
+                self.entrada2.mycursor.execute(f'update Produtos set {atributo} = {atributo} - {int(var)} where cod = {cod}')
+                self.entrada2.conexao.commit()
 
-            else:
-                pass
     
     def imprimir_hist_saida(self):
         for i in range(len(self.listaHistSaida)):
