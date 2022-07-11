@@ -45,7 +45,7 @@ class Menu:
                         atributo = 'quantidade'
                         saida.sair_produtos(cod,var,atributo)
                     elif entrada2 == '6':
-                        compra.imprimir_hist()
+                       pass
                     elif entrada2 == '7':
                         saida.imprimir_hist_saida()
                     elif entrada2 == '8':

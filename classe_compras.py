@@ -4,20 +4,17 @@ from datetime import datetime
 class Compra:
     def __init__(self):
         self.entrada = DBestoque()
-        self.listaHist = []
 
 
-    def comprar_produtos(self,id_compra,cod,var,atributo,atributo2):
-        comando_sql = f'insert into (quant) values ({var})'
+    def comprar_produtos(self,cod,var,atributo):
+        comando_sql = 'select cod from Produtos'
         self.entrada.mycursor.execute(comando_sql)
-        if int(cod) == id_compra:
-            self.entrada.mycursor.execute(f'update Produtos inner join Compras_Produtos on '
-                                          f'Produtos.cod = Compras_Produtos.cod_produtos '
-                                          f'set Produtos.{atributo} = Produtos.{atributo} + Compras_Produtos.{atributo2}')
-            self.entrada.conexao.commit()
-        else:
-            pass
+        lista = self.entrada.mycursor.fetchall()
+        for i in lista:
+            if int(cod) == i[0]:
+                self.entrada.mycursor.execute(
+                    f'update Produtos set {atributo} = {atributo} + {int(var)} where cod = {cod}')
+                self.entrada.conexao.commit()
 
 
-    def imprimir_hist(self):
-        pass
+
